@@ -1,0 +1,37 @@
+{% extends 'notas/base.html' %}
+
+{% block content %}
+<div class="notas-grid">
+    {% for nota in notas %}
+    <div class="nota-card">
+        <div class="nota-titulo">
+            <i class="bi bi-sticky-fill"></i> {{ nota.titulo }}
+        </div>
+        <div class="nota-contenido">
+            <p>{{ nota.contenido|truncatewords:30 }}</p>
+        </div>
+        <div class="nota-meta">
+            <i class="bi bi-calendar3"></i> {{ nota.fecha_creacion|date:"d/m/Y H:i" }}
+        </div>
+        <div class="nota-acciones">
+            <a href="{% url 'editar_nota' nota.id %}" class="edit-btn"><i class="bi bi-pencil"></i> Editar</a>
+            <form method="post" action="{% url 'eliminar_nota' nota.id %}" style="display: inline;">
+                {% csrf_token %}
+                <button type="submit" class="delete-btn" onclick="return confirm('¿Eliminar esta nota?')"><i class="bi bi-trash"></i> Eliminar</button>
+            </form>
+        </div>
+    </div>
+    {% empty %}
+    <div class="empty-state">
+        <i class="bi bi-journal-x"></i>
+        {% if query %}
+            <p>No se encontraron notas para "<strong>{{ query }}</strong>"</p>
+            <a href="{% url 'lista_notas' %}" class="btn-outline btn-primary"><i class="bi bi-arrow-left"></i> Ver todas</a>
+        {% else %}
+            <p>Tu libreta está vacía</p>
+            <a href="{% url 'crear_nota' %}" class="btn-outline btn-primary"><i class="bi bi-plus-circle"></i> Crear primera nota</a>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
