@@ -19,8 +19,7 @@ def test_login_camino_feliz(driver):
     driver.find_element(By.CSS_SELECTOR, "button[type='submit']").click()
     time.sleep(2)
     
-    # Verificar que el login fue exitoso
-    # Después del login, normalmente redirige a /notas/ o /dashboard/
+
     assert "notas" in driver.current_url or "dashboard" in driver.current_url or "bienvenido" in driver.page_source.lower()
     
     print("✅ Login exitoso verificado")
@@ -44,7 +43,7 @@ def test_login_negativo(driver):
     pagina = driver.page_source.lower()
     assert "error" in pagina or "inválido" in pagina or "incorrecto" in pagina
     
-    # Además, NO debe redirigir a página de notas
+
     assert "notas" not in driver.current_url
     
     print("✅ Error mostrado correctamente")
@@ -59,7 +58,7 @@ def test_login_limites(driver):
     driver.get("http://localhost:8000/login/")
     time.sleep(1)
     
-    # Django tiene límite de 150 caracteres para username
+    
     usuario_largo = "a" * 151
     driver.find_element(By.NAME, "username").send_keys(usuario_largo)
     driver.find_element(By.NAME, "password").send_keys("Chamon1234")

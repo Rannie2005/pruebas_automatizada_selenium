@@ -9,10 +9,10 @@ from selenium.webdriver.support import expected_conditions as EC
 from datetime import datetime
 import time
 
-# === IMPORTANTE: webdriver-manager maneja la versión automáticamente ===
+
 from webdriver_manager.chrome import ChromeDriverManager
 
-# Configurar Django
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'blog_notas.settings')
 django.setup()
 
@@ -23,7 +23,7 @@ def driver():
     """Abre Chrome - webdriver-manager descarga el driver correcto automáticamente"""
     print("\n🚀 Abriendo navegador...")
     
-    # === ESTA ES LA MAGIA: webdriver-manager detecta tu Chrome y descarga el driver correcto ===
+
     service = Service(ChromeDriverManager().install())
     
     options = webdriver.ChromeOptions()

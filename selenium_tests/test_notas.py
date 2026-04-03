@@ -40,7 +40,7 @@ def test_crear_nota_negativo(logged_driver):
     logged_driver.get("http://localhost:8000/crear/")
     time.sleep(2)
     
-    # Solo llenar contenido, dejar título vacío
+
     contenido_field = logged_driver.find_element(By.ID, "id_contenido")
     contenido_field.send_keys("Contenido sin título")
     
@@ -140,7 +140,7 @@ def test_editar_nota_camino_feliz(logged_driver):
         boton_editar = logged_driver.find_element(By.CSS_SELECTOR, ".edit-btn")
         boton_editar.click()
     except:
-        # Si no encuentra, intentar con el enlace
+        
         boton_editar = logged_driver.find_element(By.CSS_SELECTOR, "a[href*='editar']")
         boton_editar.click()
     
